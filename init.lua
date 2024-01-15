@@ -14,9 +14,16 @@ minetest.register_node("rock_piles:sand_with_stones", {
 	sounds = default.node_sound_leaves_defaults(),
 })
 
+--minetest.log("hello1:", "hello1")
 local rocks_variants = 2
+local rocks_sizes = {"small", "medium"}
 
-local function register_nodes(index, desert)
+local cbox = {
+	type = "fixed",
+	fixed = {-5/16, -8/16, -6/16, 5/16, -1/32, 5/16},
+}
+
+local function register_nodes(index, desert, size)
 	local rocks_groups = {oddly_breakable_by_hand = 3, attached_node = 1}
 	if index == 1 then
 		rocks_groups.not_in_creative_inventory = 0
@@ -30,14 +37,14 @@ local function register_nodes(index, desert)
 		desert_str_1 = "desert_"
 		desert_str_2 = "Desert "
 	end
-
-	minetest.register_node("rock_piles:loose_"..desert_str_1.."rocks_"..index, {
-		description = "Loose "..desert_str_2.."Rocks",
+	--minetest.log("register_node:", "register_node: ".."rock_piles:loose_"..desert_str_1.."rocks_"..size.."_"..index)
+	minetest.register_node("rock_piles:loose_"..desert_str_1.."rocks_"..size.."_"..index, {
+		description = size.."_".."Loose "..desert_str_2.."Rocks",
 		drawtype = "mesh",
-		drop = "rock_piles:loose_"..desert_str_1.."rocks_1",
+		drop = "rock_piles:loose_"..desert_str_1.."rocks_"..size.."_1",
 		groups = rocks_groups,
 		inventory_image = "loose_"..desert_str_1.."rocks_inv.png",
-		mesh = "rock_piles_" .. index ..".obj",
+		mesh = "rock_piles_" .. size.."_"..index ..".obj",
 		on_place = function(itemstack, placer, pointed_thing)
 			local pointed_pos = minetest.get_pointed_thing_position(pointed_thing, true)
 			local return_value = minetest.item_place(itemstack, placer, pointed_thing, math.random(0,3))
@@ -53,22 +60,30 @@ local function register_nodes(index, desert)
 			type = "fixed",
 			fixed = {-0.5, -0.5, -0.5, 0.5, -0.3125, 0.5},
 		},
+		collision_box = cbox,
 		sunlight_propagates = true,
 		tiles = {"default_"..desert_str_1.."stone.png"},
-		walkable = false,
+		walkable = true,
+		--sounds = {
+			--walk = {name = "default_gravel_footstep", gain = 0.5},
+			--},
+		sounds = default.node_sound_gravel_defaults(),
+	
 	})
 end
 
 for i = 1, rocks_variants do
-	register_nodes(i, false)
-	register_nodes(i, true)
+	for _, size in ipairs(rocks_sizes) do
+		register_nodes(i, false, size)
+		register_nodes(i, true, size)
+	end
 end
 
 ------------
 -- Crafts --
 ------------
 
-local function register_crafts(desert)
+local function register_crafts(desert, size)
 
 	local desert_str
 	if desert then
@@ -78,7 +93,7 @@ local function register_crafts(desert)
 	end
 
 	local cobble_str = "default:"..desert_str.."cobble"
-	local loose_str = "rock_piles:loose_"..desert_str.."rocks_1"
+	local loose_str = "rock_piles:loose_"..desert_str.."rocks_"..size.."_1"
 
 	minetest.register_craft({
 		output = cobble_str,
@@ -100,16 +115,19 @@ local function register_crafts(desert)
 
 end
 
-register_crafts(false)
-register_crafts(true)
+for _, size in ipairs(rocks_sizes) do
+	register_crafts(false, size)
+	register_crafts(true, size)
+end
 
 --------------------
 -- Map Generation --
 --------------------
-
+--local rocks_sizes2 = {"small", "medium"}
+for _, size in ipairs(rocks_sizes) do
 minetest.register_on_generated(function(minp, maxp, seed)
 
-	if maxp.y < 0 then return end
+	--if maxp.y < 0 then return end
 
 	-- Check mapgen
 	local mgname = minetest.get_mapgen_params().mgname
@@ -141,12 +159,15 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			local target_x = math.random(x0, x1)
 			local target_z = math.random(z0, z1)
 			local ground_y = heightmap[(target_x-minp.x) + (target_z-minp.z)*chunk + 1]
+			---------------------------------
+			
 			local ground_name = minetest.get_node({x=target_x, y=ground_y, z=target_z}).name
 
 			if ground_y < maxp.y and ground_y >= minp.y
 			                     and ground_name ~= "air" then
 			-- I check if the node underneath is not air because apparently the ground level
 			-- provided by heightmap does not account for cave genetarion.
+							-------------------------------------------------------
 				local target_coord = {x=target_x, y=ground_y + 1, z=target_z}
 				local target_name = minetest.get_node(target_coord).name
 
@@ -165,16 +186,19 @@ minetest.register_on_generated(function(minp, maxp, seed)
 						                   ground_name == "default:desert_stone")
 					end
 
-					if generate_desert then
-						minetest.set_node(target_coord,{name = "rock_piles:loose_desert_rocks_"..math.random(1,rocks_variants),
-							                        param2 = math.random(0,3)})
-					else
-						minetest.set_node(target_coord,{name = "rock_piles:loose_rocks_"..math.random(1,rocks_variants),
-							                        param2 = math.random(0,3)})
-					end
+						if generate_desert then
+							minetest.set_node(target_coord,{name = "rock_piles:loose_desert_rocks_"..size.."_"..math.random(1,rocks_variants),
+														param2 = math.random(0,3)})
+						else
+							minetest.set_node(target_coord,{name = "rock_piles:loose_rocks_"..size.."_"..math.random(1,rocks_variants),
+														param2 = math.random(0,3)})
+						--	 minetest.log("name:", "name:" .. "rock_piles:loose_rocks_"..size.."_"..math.random(1,rocks_variants))
+							
+						end
 				end
 			end
 		end
 	end
 	end
 end)
+end
