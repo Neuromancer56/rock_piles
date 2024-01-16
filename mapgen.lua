@@ -3,7 +3,7 @@
 
 
 local function register_decorations(index, size)
-	minetest.log("hello1:", "index-size:"..index..size)
+	--minetest.log("hello1:", "index-size:"..index..size)
 	minetest.register_decoration({
 		decoration = {
 			"rock_piles:loose_rocks_"..size.."_"..index,
