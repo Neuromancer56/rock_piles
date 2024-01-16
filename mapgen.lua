@@ -13,7 +13,9 @@ local function register_decorations(index, size)
 			"default:gravel",
 			"default:stone",
 			"default:permafrost_with_stones",
-			"default:sand"
+			"default:sand",
+			"default:cobble",
+			"default:mossycobble"
 		},
 		noise_params = {
 			offset = 0,
