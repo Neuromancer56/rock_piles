@@ -16,7 +16,7 @@ minetest.register_node("rock_piles:sand_with_stones", {
 
 --minetest.log("hello1:", "hello1")
 local rocks_variants = 2
-local rocks_sizes = {"small", "medium"}
+local rocks_sizes = {"small", "medium", "large"}
 
 local cbox = {
 	type = "fixed",
@@ -123,7 +123,7 @@ end
 --------------------
 -- Map Generation --
 --------------------
---local rocks_sizes2 = {"small", "medium"}
+--[[
 for _, size in ipairs(rocks_sizes) do
 minetest.register_on_generated(function(minp, maxp, seed)
 
@@ -152,7 +152,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		local z1 = minp.z + math.floor((divz+1) * divlen) - 1
 
 		-- Determine amount of rocks from perlin noise
-		local amount = math.floor((perlin:get2d({x=x0, y=z0}) + 1) ^ 3)
+		local amount = math.floor((perlin:get2d({x=x0, y=z0}) + 1) ^ 1)  --was 3
 
 		-- Find positions for rocks
 		for i=1,amount do
@@ -202,3 +202,5 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	end
 end)
 end
+]]
+dofile(minetest.get_modpath("rock_piles").."/mapgen.lua")
