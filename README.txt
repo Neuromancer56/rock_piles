@@ -5,7 +5,7 @@ based on Loose Rocks mod by Eduardo Mezêncio
 
 Licenses: 
 
-Code: GPLv3
+Code: MIT
 Texture and models: CC BY-SA 3.0
 
 see LICENSE.txt
@@ -16,14 +16,17 @@ https://forum.minetest.net/viewtopic.php?f=15&t=6346
 
 -------------------------------------------------------------------------------
 
-This mod adds Loose Rocks to Minetest.
+This mod adds Rock Piles to Minetest.
 
-- Loose Rocks generate naturally on the surface of the world
-- Collect Loose Rocks with bare hands
-- Loose Desert Rocks generate in deserts
-- Craft a Cobblestone with 4 Loose Rocks in a 2x2 grid (same with Desert
+- Rocks piles generate naturally on the surface of the world and in caves
+- Collect Rock Piles with bare hands
+- Desert Rock Piles generate in deserts
+- Craft a Cobblestone with 4 Rocks Piles in a 2x2 grid (same with Desert
 Cobblestone, using Loose Desert Rocks)
-- A Cobblestone will give you 4 Loose Rocks
+- A Cobblestone will give you 4 Rock Piles
 - Also great for decoration!
+- There are a variety of Rock Pile sizes
+- Walking on rocks sounds like walking on gravel
+
 
 Have fun!
