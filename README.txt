@@ -5,7 +5,7 @@ based on Loose Rocks mod by Eduardo Mezêncio
 
 Licenses: 
 
-Code: MIT
+Code: GPLv3
 Texture and models: CC BY-SA 3.0
 
 see LICENSE.txt
