@@ -45,7 +45,8 @@ local function register_decorations(index, size)
 		},
 		place_on = {
 			"default:desert_sand",
-			"default:desert_stone"
+			"default:desert_stone",
+			"badlands:red_sand"
 		},
 		noise_params = {
 			offset = 0,
@@ -77,3 +78,19 @@ for _, size in ipairs(rocks_sizes) do
 		register_decorations(i, size)
 	end
 end
+
+
+--[[minetest.register_decoration({
+    name = "rock_piles:guides",
+    deco_type = "schematic",
+    place_on = {"default:sand"},
+    place_offset_y = -1,  -- -29
+    sidelen = 16,
+    fill_ratio = 0.0005,  --0.00005,
+   -- biomes = {"rainforest"},
+    y_max = 400.5,
+    y_min = 3.5,  --10.5
+    schematic = minetest.get_modpath("rock_piles").."/schematics/guides.mts",
+    flags = "force_placement",
+    rotation = "random",
+})]] 
