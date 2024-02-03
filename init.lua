@@ -43,7 +43,7 @@ local function register_nodes(index, desert, size)
 		drawtype = "mesh",
 		drop = "rock_piles:loose_"..desert_str_1.."rocks_"..size.."_1",
 		groups = rocks_groups,
-		inventory_image = "loose_"..desert_str_1.."rocks_inv.png",
+		inventory_image =  size.."_loose_"..desert_str_1.."rocks_inv.png",
 		mesh = "rock_piles_" .. size.."_"..index ..".obj",
 		on_place = function(itemstack, placer, pointed_thing)
 			local pointed_pos = minetest.get_pointed_thing_position(pointed_thing, true)
