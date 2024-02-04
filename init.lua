@@ -45,7 +45,7 @@ local function register_nodes(index, desert, size)
 		groups = rocks_groups,
 		inventory_image =  size.."_loose_"..desert_str_1.."rocks_inv.png",
 		mesh = "rock_piles_" .. size.."_"..index ..".obj",
-		on_place = function(itemstack, placer, pointed_thing)
+		--[[on_place = function(itemstack, placer, pointed_thing)
 			local pointed_pos = minetest.get_pointed_thing_position(pointed_thing, true)
 			local return_value = minetest.item_place(itemstack, placer, pointed_thing, math.random(0,3))
 			if minetest.get_node(pointed_pos).name == "rock_piles:loose_"..desert_str_1.."rocks_1" then
@@ -53,7 +53,23 @@ local function register_nodes(index, desert, size)
 				                                param2 = math.random(0,3)})
 			end
 			return return_value
+		end,]]
+		on_place = function(itemstack, placer, pointed_thing)
+			local pointed_pos = minetest.get_pointed_thing_position(pointed_thing, true)
+			local return_value = minetest.item_place(itemstack, placer, pointed_thing, math.random(0,3))
+			local node_name = minetest.get_node(pointed_pos).name
+
+			-- Check if the user is placing variant 1
+			--if string.find(node_name, "rock_piles:loose_"..desert_str_1.."rocks_"..size.."_1") then
+				-- Roll a dice to decide which variant to place (1 or 2)
+				local random_variant = math.random(1, rocks_variants)
+				minetest.set_node(pointed_pos, {name = "rock_piles:loose_"..desert_str_1.."rocks_"..size.."_"..random_variant,
+												 param2 = math.random(0,3)})
+			--end
+
+			return return_value
 		end,
+
 		paramtype = "light",
 		paramtype2 = "facedir",
 		selection_box = {
