@@ -15,9 +15,11 @@ local function register_decorations(index, size)
 			"default:permafrost_with_stones",
 			"default:sand",
 			"default:cobble",
-			"default:mossycobble"
+			"default:mossycobble",
+			"default:water_source",  -- Add water source node
+			"default:river_water_source", 
 		},
-		noise_params = {
+		--[[noise_params = {
 			offset = 0,
 			scale = 0.0078125,
 			spread = {
@@ -30,6 +32,20 @@ local function register_decorations(index, size)
 			persist = 0.6,
 			flags = "absvalue",
 			lacunarity = 2
+		},]]
+		noise_params = {
+			offset = 0,
+			scale = 0.00018125,  --0.0028125,
+			spread = {
+				y = 50,
+				z = 50,
+				x = 50
+			},
+			seed = 0,
+			octaves = 9,
+			persist = 0.9,
+			flags = "absvalue",
+			lacunarity = 10
 		},
 		param2 = 0,
 		flags = "all_floors",
@@ -38,7 +54,8 @@ local function register_decorations(index, size)
 		y_min = -16000, --  -16
 		y_max = 16000   -- 48
 	})
-
+	
+	
 	minetest.register_decoration({
 		decoration = {
 			"rock_piles:loose_desert_rocks_"..size.."_"..index,
@@ -48,7 +65,7 @@ local function register_decorations(index, size)
 			"default:desert_stone",
 			"badlands:red_sand"
 		},
-		noise_params = {
+		--[[noise_params = {
 			offset = 0,
 			scale = 0.0078125,
 			spread = {
@@ -61,9 +78,24 @@ local function register_decorations(index, size)
 			persist = 0.6,
 			flags = "absvalue",
 			lacunarity = 2
+		},]]
+		noise_params = {
+			offset = 0,
+			scale = 0.00018125,  --0.0028125,
+			spread = {
+				y = 50,
+				z = 50,
+				x = 50
+			},
+			seed = 0,
+			octaves = 9,
+			persist = 0.9,
+			flags = "absvalue",
+			lacunarity = 10
 		},
 		param2 = 0,
 		flags = "all_floors",
+		--flags = "force_placement",
 		deco_type = "simple",
 		param2_max = 3,
 		y_min = -16000, --  -16
