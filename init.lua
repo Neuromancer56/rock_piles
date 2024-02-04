@@ -119,23 +119,51 @@ local function register_crafts(desert, size)
 			{"", "", ""},
 		}
 	})
+end
 
+local function register_crafts_rockpiles(desert)
+	
+	local desert_str
+	if desert then
+		desert_str = "desert_"
+	else
+		desert_str = ""
+	end
+	local cobble_str = "default:"..desert_str.."cobble"
 	minetest.register_craft({
-		output = "rock_piles:loose_"..desert_str.."rocks_1 4",
+		output = "rock_piles:loose_"..desert_str.."rocks_large_1 6",
 		recipe = {
-			{cobble_str, "", ""},
-			{"", "", ""},
-			{"", "", ""},
+			{"", cobble_str, ""},
+			{cobble_str, "", cobble_str},
+			{"", cobble_str, ""},
 		}
 	})
+		minetest.register_craft({
+		output = "rock_piles:loose_"..desert_str.."rocks_medium_1 6",
+		recipe = {
+			{"", "", ""},
+			{"", cobble_str, ""},
+			{cobble_str, "", cobble_str},
 
+		}
+	})
+		minetest.register_craft({
+		output = "rock_piles:loose_"..desert_str.."rocks_small_1 6",
+		recipe = {
+			{"", "", ""},
+			{"", "", ""},
+			{cobble_str, "", cobble_str},
+
+		}
+	})	
 end
 
 for _, size in ipairs(rocks_sizes) do
 	register_crafts(false, size)
 	register_crafts(true, size)
 end
-
+register_crafts_rockpiles(true)
+register_crafts_rockpiles(false)
 --------------------
 -- Map Generation --
 --------------------

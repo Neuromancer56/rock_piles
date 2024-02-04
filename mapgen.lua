@@ -42,7 +42,7 @@ local function register_decorations(index, size)
 				x = 50
 			},
 			seed = 0,
-			octaves = 9,
+			octaves = 6,  --9
 			persist = 0.9,
 			flags = "absvalue",
 			lacunarity = 10
@@ -63,7 +63,8 @@ local function register_decorations(index, size)
 		place_on = {
 			"default:desert_sand",
 			"default:desert_stone",
-			"badlands:red_sand"
+			"badlands:red_sand",
+			"default:dry_dirt_with_dry_grass",
 		},
 		--[[noise_params = {
 			offset = 0,
@@ -88,7 +89,7 @@ local function register_decorations(index, size)
 				x = 50
 			},
 			seed = 0,
-			octaves = 9,
+			octaves = 6,
 			persist = 0.9,
 			flags = "absvalue",
 			lacunarity = 10
