@@ -35,7 +35,7 @@ local function register_decorations(index, size)
 		},]]
 		noise_params = {
 			offset = 0,
-			scale = 0.00018125,  --0.0028125,
+			scale = 0.00028125,  --0.0028125,
 			spread = {
 				y = 50,
 				z = 50,
@@ -82,7 +82,7 @@ local function register_decorations(index, size)
 		},]]
 		noise_params = {
 			offset = 0,
-			scale = 0.00018125,  --0.0028125,
+			scale = 0.00028125,  --0.0028125,
 			spread = {
 				y = 50,
 				z = 50,
@@ -102,6 +102,9 @@ local function register_decorations(index, size)
 		y_min = -16000, --  -16
 		y_max = 16000   -- 48
 	})
+	
+
+
 end
 
 local rocks_variants = 2
