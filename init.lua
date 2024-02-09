@@ -41,7 +41,13 @@ local function register_nodes(index, desert, size)
 	minetest.register_node("rock_piles:loose_"..desert_str_1.."rocks_"..size.."_"..index, {
 		description = size.."_".."Loose "..desert_str_2.."Rocks",
 		drawtype = "mesh",
-		drop = "rock_piles:loose_"..desert_str_1.."rocks_"..size.."_1",
+		--drop = "rock_piles:loose_"..desert_str_1.."rocks_"..size.."_1",
+		drop = {
+		max_items = 1,
+		items = {
+			{items = {"default:flint"}, rarity = 30},
+			{items = {"rock_piles:loose_"..desert_str_1.."rocks_"..size.."_1"}}
+		}},
 		groups = rocks_groups,
 		inventory_image =  size.."_loose_"..desert_str_1.."rocks_inv.png",
 		mesh = "rock_piles_" .. size.."_"..index ..".obj",
