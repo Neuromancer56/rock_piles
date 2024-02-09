@@ -18,6 +18,8 @@ local function register_decorations(index, size)
 			"default:mossycobble",
 			"default:water_source",  -- Add water source node
 			"default:river_water_source", 
+			"default:silver_sand",
+			"default:dirt_with_coniferous_litter",
 		},
 		--[[noise_params = {
 			offset = 0,
@@ -35,7 +37,7 @@ local function register_decorations(index, size)
 		},]]
 		noise_params = {
 			offset = 0,
-			scale = 0.00028125,  --0.0028125,
+			scale = 0.00038125,  --0.0028125,
 			spread = {
 				y = 50,
 				z = 50,
@@ -65,6 +67,7 @@ local function register_decorations(index, size)
 			"default:desert_stone",
 			"badlands:red_sand",
 			"default:dry_dirt_with_dry_grass",
+			"default:dry_dirt",
 		},
 		--[[noise_params = {
 			offset = 0,
@@ -82,7 +85,7 @@ local function register_decorations(index, size)
 		},]]
 		noise_params = {
 			offset = 0,
-			scale = 0.00028125,  --0.0028125,
+			scale = 0.00038125,  --0.0028125,
 			spread = {
 				y = 50,
 				z = 50,
