@@ -117,6 +117,18 @@ local function register_crafts(desert, size)
 	local cobble_str = "default:"..desert_str.."cobble"
 	local loose_str = "rock_piles:loose_"..desert_str.."rocks_"..size.."_1"
 
+	if size == 'large' then 
+		minetest.register_craft({
+			output = cobble_str,
+			recipe = {
+				{loose_str, "", ""},
+				{"", "", ""},
+				{"", "", ""},
+			}
+		})
+		end
+
+	if size == 'medium' then 
 	minetest.register_craft({
 		output = cobble_str,
 		recipe = {
@@ -125,6 +137,18 @@ local function register_crafts(desert, size)
 			{"", "", ""},
 		}
 	})
+	end
+	if size == 'small' then 
+		minetest.register_craft({
+			output = cobble_str,
+			recipe = {
+				{loose_str, loose_str, loose_str},
+				{loose_str, loose_str, loose_str},
+				{loose_str, loose_str, loose_str},
+			}
+		})
+		end
+
 end
 
 local function register_crafts_rockpiles(desert)
@@ -137,7 +161,7 @@ local function register_crafts_rockpiles(desert)
 	end
 	local cobble_str = "default:"..desert_str.."cobble"
 	minetest.register_craft({
-		output = "rock_piles:loose_"..desert_str.."rocks_large_1 6",
+		output = "rock_piles:loose_"..desert_str.."rocks_large_1 4",
 		recipe = {
 			{"", cobble_str, ""},
 			{cobble_str, "", cobble_str},
@@ -145,7 +169,7 @@ local function register_crafts_rockpiles(desert)
 		}
 	})
 		minetest.register_craft({
-		output = "rock_piles:loose_"..desert_str.."rocks_medium_1 6",
+		output = "rock_piles:loose_"..desert_str.."rocks_medium_1 12",
 		recipe = {
 			{"", "", ""},
 			{"", cobble_str, ""},
@@ -154,7 +178,7 @@ local function register_crafts_rockpiles(desert)
 		}
 	})
 		minetest.register_craft({
-		output = "rock_piles:loose_"..desert_str.."rocks_small_1 6",
+		output = "rock_piles:loose_"..desert_str.."rocks_small_1 18",
 		recipe = {
 			{"", "", ""},
 			{"", "", ""},
