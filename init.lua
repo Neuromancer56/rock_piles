@@ -121,9 +121,8 @@ local function register_crafts(desert, size)
 		minetest.register_craft({
 			output = cobble_str,
 			recipe = {
-				{loose_str, "", ""},
-				{"", "", ""},
-				{"", "", ""},
+				{loose_str},
+
 			}
 		})
 		end
@@ -132,9 +131,8 @@ local function register_crafts(desert, size)
 	minetest.register_craft({
 		output = cobble_str,
 		recipe = {
-			{loose_str, loose_str, ""},
-			{loose_str, loose_str, ""},
-			{"", "", ""},
+			{loose_str, loose_str},
+			{loose_str, loose_str},
 		}
 	})
 	end
