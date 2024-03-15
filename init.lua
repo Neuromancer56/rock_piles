@@ -5,14 +5,6 @@
 -- Node Registration --
 -----------------------
 
-minetest.register_node("rock_piles:sand_with_stones", {
-	description = ("Sand with stones"),
-	paramtype = "light",
-	paramtype2 = "facedir",
-	tiles = {"sand_with_stone.png"},
-	groups = {snappy=3, flammable=2},
-	sounds = default.node_sound_leaves_defaults(),
-})
 
 --minetest.log("hello1:", "hello1")
 local rocks_variants = 2
@@ -43,7 +35,7 @@ local function register_nodes(index, desert, size)
 		drawtype = "mesh",
 		--drop = "rock_piles:loose_"..desert_str_1.."rocks_"..size.."_1",
 		drop = {
-		max_items = 1,
+		max_items = 2,
 		items = {
 			{items = {"default:flint"}, rarity = 30},
 			{items = {"rock_piles:loose_"..desert_str_1.."rocks_"..size.."_1"}}
@@ -63,16 +55,19 @@ local function register_nodes(index, desert, size)
 		on_place = function(itemstack, placer, pointed_thing)
 			local pointed_pos = minetest.get_pointed_thing_position(pointed_thing, true)
 			local return_value = minetest.item_place(itemstack, placer, pointed_thing, math.random(0,3))
-			local node_name = minetest.get_node(pointed_pos).name
+			local pointed_node = minetest.get_node(pointed_pos)
 
-			-- Check if the user is placing variant 1
-			--if string.find(node_name, "rock_piles:loose_"..desert_str_1.."rocks_"..size.."_1") then
+			if pointed_node and pointed_node.name then
+				local node_def = minetest.registered_nodes[pointed_node.name]
+				if node_def and node_def.buildable_to == true then
+				else
 				-- Roll a dice to decide which variant to place (1 or 2)
 				local random_variant = math.random(1, rocks_variants)
 				minetest.set_node(pointed_pos, {name = "rock_piles:loose_"..desert_str_1.."rocks_"..size.."_"..random_variant,
 												 param2 = math.random(0,3)})
-			--end
 
+				end
+			end
 			return return_value
 		end,
 
